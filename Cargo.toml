@@ -1,0 +1,14 @@
+[package]
+name = "tsdelay"
+version = "0.1.0"
+authors = ["Junki Ishida <jishida.dev@gmail.com>"]
+edition = "2018"
+license = "MIT"
+
+[dependencies]
+structopt = "0.2"
+libc = "0.2"
+
+[dependencies.ffmpeg-sys]
+version = "3.4.1"
+features = ["build", "avcodec", "avformat"]

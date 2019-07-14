@@ -1,0 +1,30 @@
+#!/bin/sh
+
+PROJECT_DIR="$(cd "$(dirname "$0")"|pwd)"
+BUILD_DIR="$PROJECT_DIR/build"
+PREFIX_FILE="$BUILD_DIR/prefix"
+PREFIX=/usr/local
+
+while [ "$1" != '' ]
+do
+    case "$1" in
+        --prefix)
+            PREFIX="$2"
+            shift
+            ;;
+        --prefix=*)
+            PREFIX="$(printf %s "$1"|awk '{print substr($0,10)}')"
+            ;;
+        --prefix*)
+            PREFIX="$(printf %s "$1"|awk '{print substr($0,9)}')"
+            ;;
+    esac
+    shift
+done
+
+if [ ! -d "$BUILD_DIR" ]
+then
+    mkdir -p "$BUILD_DIR"
+fi
+
+printf %s "$PREFIX">"$PREFIX_FILE"
